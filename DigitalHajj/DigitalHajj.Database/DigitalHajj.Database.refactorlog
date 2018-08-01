@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="4dd0582c-eb38-41c8-82a8-c564dc7a39e1" ChangeDateTime="08/01/2018 22:39:34">
+    <Property Name="ElementName" Value="[dbo].[Camera].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Camera]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="camera_id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cffad0d9-0513-4b32-90e9-630a5489d31d" ChangeDateTime="08/01/2018 22:42:03">
+    <Property Name="ElementName" Value="[dbo].[Airport].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Airport]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="airport_id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cba98bbd-fcd1-451b-92ed-fc689bb5b71d" ChangeDateTime="08/01/2018 22:42:50">
+    <Property Name="ElementName" Value="[dbo].[HallType].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HallType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="halltype_id" />
+  </Operation>
+</Operations>
