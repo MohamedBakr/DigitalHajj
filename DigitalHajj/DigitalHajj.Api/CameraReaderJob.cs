@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Reactive.Linq;
+using System.Reactive.Concurrency;
 
 namespace DigitalHajj.Api
 {
@@ -30,11 +32,15 @@ namespace DigitalHajj.Api
         {
             _logger.LogInformation("Timed Background Service is starting.");
 
+            events.CollectionChanged += Events_CollectionChanged;
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromSeconds(5));
 
             return Task.CompletedTask;
         }
+
+   
+
         public Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Timed Background Service is stopping.");
@@ -54,7 +60,6 @@ namespace DigitalHajj.Api
         public void DoWork(object state)
         {
             
-            events.CollectionChanged += Events_CollectionChanged;
             using (var scope = Services.CreateScope())
             {
                 crowdCounterBl = scope.ServiceProvider.GetRequiredService<CrowdCounterBl>();

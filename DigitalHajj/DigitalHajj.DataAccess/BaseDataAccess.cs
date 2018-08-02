@@ -17,7 +17,7 @@ namespace DigitalHajj.DataAccess
 
         public void Add(Entity entity)
         {
-            DbConnection.Insert(entity);
+            DbConnection.InsertAsync(entity);
         }
 
         public IEnumerable<Entity> GetAll()

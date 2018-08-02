@@ -21,8 +21,8 @@ export class MapViewComponent implements OnInit {
             zoom: 5.5
         };
         this.overlays= [
-          new google.maps.Circle({center: {lat: 21.6708338, lng: 39.1486065}, fillColor: '#ff76D2', fillOpacity: 0.35, strokeWeight: 1, radius: 150000}),
-          new google.maps.Circle({center: {lat: 24.5537422, lng: 39.7128899}, fillColor: '#ff76D2', fillOpacity: 0.35, strokeWeight: 1, radius: 150000}),
+          new google.maps.Circle({center: {lat: 21.6708338, lng: 39.1486065}, fillColor: '#ff76D2', fillOpacity: 0.535, strokeWeight: 1, radius: 150000}),
+          new google.maps.Circle({center: {lat: 24.5537422, lng: 39.7128899}, fillColor: '#ff76D2', fillOpacity: 0.535, strokeWeight: 1, radius: 150000}),
         ];
     }
 }

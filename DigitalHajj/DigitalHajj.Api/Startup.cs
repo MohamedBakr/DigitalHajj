@@ -39,6 +39,7 @@ namespace DigitalHajj.Api
             services.AddScoped<IDbConnection>(p => Connection);
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseDataAccess<>));
             services.AddScoped<CrowdCounterBl>();
+            services.AddScoped<StatusReport>();
             services.AddHostedService<CameraReaderJob>();
 
         }
