@@ -1,10 +1,10 @@
 ﻿CREATE TABLE [dbo].[CameraEvent]
 (
-	[Id] BIGINT NOT NULL PRIMARY KEY, 
+	[Id] BIGINT NOT NULL PRIMARY KEY IDentity, 
     [camera_id] INT NULL, 
 	[channel_id] NVARCHAR(50) NULL, 
     [channel_name] NVARCHAR(250) NULL, 
-    [event_id] NVARCHAR(250) NULL, 
+    [event_id] NVARCHAR(250) NULL UNIQUE, 
     [object_id] NVARCHAR(250) NULL, 
     [origin] NVARCHAR(250) NULL, 
     [rule_id] NVARCHAR(250) NULL, 

@@ -9,9 +9,17 @@ namespace DigitalHajj.DataAccess
     {
         public CameraEvent[] GetResult(string serverURL)
         {
-            var client = new WebClient();
-            string result =  client.DownloadString(serverURL);
-            return JsonConvert.DeserializeObject<CameraEvent[]>(result);
+            try
+            {
+                var client = new WebClient();
+                string result = client.DownloadString(serverURL);
+                return JsonConvert.DeserializeObject<CameraEvent[]>(result);
+            }
+            catch (Exception ex)
+            {
+                return new CameraEvent[0];
+            }
+
         }
     }
 }
