@@ -18,7 +18,7 @@ namespace DigitalHajj.Api.Controllers
         }
 
         public CrowdCounterBl CrowdCounterBl { get; }
-
+        [HttpGet("GetAirportStatus")]
         public IActionResult GetAirportStatus()
         {
             return Ok(CrowdCounterBl.GetAirPortStatus());

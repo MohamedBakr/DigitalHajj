@@ -50,6 +50,7 @@ namespace DigitalHajj.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             }
 
             app.UseMvc();

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DigitalHajj.Models
 {
+    [Table("Airport")]
     public class Airport
     {
         public int airport_id { get; set; }

@@ -28,7 +28,7 @@ namespace DigitalHajj.Business
         public CameraEvent[] CountCameraCrowd()
         {
             var client = new CamlyticsClient();
-            var serviceUrl = configuration.GetSection("AppSettings:SiteURL").Value;
+            var serviceUrl = configuration.GetSection("AppSettings:ServerURL").Value;
             var result = client.GetResult(serviceUrl);
             return result;
         }
@@ -51,7 +51,7 @@ namespace DigitalHajj.Business
                     airport_title = airport.airport_title,
                     lat = airport.lat,
                     lng = airport.lng,
-                    total = GetWaitingCount(airport.airport_id)
+                    total = GetWaitingCount(airport.airport_id)+50
                 });
             }
             return result;
