@@ -22,12 +22,14 @@ namespace DigitalHajj.DataAccess
         {
             var parms = new DynamicParameters();
             parms.Add("@Airport", airport_id);
-            //parms.Add("@ToDate", searchPolicyCriteria.ToDate.HasValue ? (object)searchPolicyCriteria.ToDate : null);
-            //parms.Add("@Passport", string.IsNullOrEmpty(searchPolicyCriteria.Passport) == false ? (object)searchPolicyCriteria.Passport : null);
-            //parms.Add("@PolicyNumber", string.IsNullOrEmpty(searchPolicyCriteria.PolicyNumber) == false ? (object)searchPolicyCriteria.PolicyNumber : null);
-            //parms.Add("@Status", searchPolicyCriteria.Status.HasValue ? (object)searchPolicyCriteria.Status : null);
-            //return DbConnection.Query<SearchPolicyResult>("SearchPolicies", parms, commandType: CommandType.StoredProcedure).ToList();
             return DbConnection.Query<CameraStatus>("SELECT rule_name,Count(1) as total  FROM[HAJ].[dbo].[CameraEvent]   where camera_id in (select camera_id from camera where airport_id = @Airport)  group by rule_name ", parms);
+        }
+        public IEnumerable<CameraStatus> GetHallStatus(int airport , int hall_id)
+        {
+            var parms = new DynamicParameters();
+            parms.Add("@HallId", hall_id);
+            parms.Add("@Airport", airport);
+            return DbConnection.Query<CameraStatus>("SELECT rule_name,Count(1) as total  FROM[HAJ].[dbo].[CameraEvent]   where camera_id in (select camera_id from camera where halltype_id = @HallId and airport_id = @Airport)  group by rule_name ", parms);
         }
     }
 }

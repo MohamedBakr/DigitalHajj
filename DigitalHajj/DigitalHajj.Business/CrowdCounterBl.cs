@@ -12,14 +12,19 @@ namespace DigitalHajj.Business
         private readonly IConfiguration configuration;
         private readonly StatusReport statusReport;
         private readonly IBaseRepository<Airport> airportRepository;
+        private readonly IBaseRepository<Hall> hallRepository;
         private int camera_id;
         public CrowdCounterBl(IBaseRepository<CameraEvent> eventsRepository,
-            IConfiguration configuration,StatusReport statusReport,IBaseRepository<Airport> airportRepository)
+            IConfiguration configuration,
+            StatusReport statusReport,
+            IBaseRepository<Airport> airportRepository,
+            IBaseRepository<Hall> hallRepository)
         {
             EventsRepository = eventsRepository;
             this.configuration = configuration;
             this.statusReport = statusReport;
             this.airportRepository = airportRepository;
+            this.hallRepository = hallRepository;
             camera_id = int.Parse(configuration.GetSection("AppSettings:CameraId").Value);
         }
 
@@ -38,7 +43,7 @@ namespace DigitalHajj.Business
             cameraevent.camera_id = camera_id;
             EventsRepository.Add(cameraevent);
         }
-        public List<AirportStatusResult> GetAirPortStatus()
+        public List<AirportStatusResult> GetAirPortsStatus()
         {
             var airports = airportRepository.GetAll();
             var result = new List<AirportStatusResult>();
@@ -51,17 +56,47 @@ namespace DigitalHajj.Business
                     airport_title = airport.airport_title,
                     lat = airport.lat,
                     lng = airport.lng,
-                    total = GetWaitingCount(airport.airport_id)+50
+                    total = GetAirPortWaitingCount(airport.airport_id)+50
                 });
             }
             return result;
             
         }
 
-        private long GetWaitingCount(int airportId)
+        public object GetAirPortStatus(int airportId)
+        {
+            var airport = airportRepository.GetDetails(new Airport() { airport_id = airportId });
+            var halls = hallRepository.GetAll();
+            var result = new List<object>();
+            foreach (var hall in halls)
+            {
+                var total = GetHallWaitingCount(airportId, hall.halltype_id);
+                var hallStatus = new
+                {
+                    hall_id = hall.halltype_id,
+                    total 
+                };
+                if (total > 0)
+                    result.Add(hallStatus);
+            }
+            var airportInfo = new {
+                airport.airport_id,
+                airport.airport_title,
+                halls = result
+            };
+            return airportInfo;
+
+        }
+
+        private long GetAirPortWaitingCount(int airportId)
         {
             var result = statusReport.GetAirportStatus(airportId);
-            if(result.Count() == 2)
+            return CalculateTotal(result);
+        }
+
+        private static long CalculateTotal(IEnumerable<CameraStatus> result)
+        {
+            if (result.Count() == 2)
             {
                 var enter = result.FirstOrDefault(r => r.rule_name == "Enter").total;
                 var exit = result.FirstOrDefault(r => r.rule_name == "Exit").total;
@@ -69,6 +104,12 @@ namespace DigitalHajj.Business
                 return total > 0 ? total : 0;
             }
             return 0;
+        }
+
+        private long GetHallWaitingCount(int airport, int hallId)
+        {
+            var result = statusReport.GetHallStatus(airport , hallId);
+            return CalculateTotal(result);
         }
     }
 }

@@ -13,4 +13,7 @@ export class StatusReportService {
   getAirPortStatus () : Observable<airportstatus[]>{
     return this.httpClient.get<airportstatus[]>('DigitalHaj/GetAirportStatus');
   }
+  getAirPortDetails(airport:string) {
+    return this.httpClient.get<airportstatus[]>('DigitalHaj/GetAirportStatus/'+airport);
+  }
 }

@@ -18,10 +18,17 @@ namespace DigitalHajj.Api.Controllers
         }
 
         public CrowdCounterBl CrowdCounterBl { get; }
+
         [HttpGet("GetAirportStatus")]
         public IActionResult GetAirportStatus()
         {
-            return Ok(CrowdCounterBl.GetAirPortStatus());
+            return Ok(CrowdCounterBl.GetAirPortsStatus());
+        }
+
+        [HttpGet("GetAirportStatus/{airport}")]
+        public IActionResult GetAirportStatus(int airport)
+        {
+            return Ok(CrowdCounterBl.GetAirPortStatus(airport));
         }
     }
 }

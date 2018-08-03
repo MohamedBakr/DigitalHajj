@@ -8,19 +8,22 @@ import {GMapModule} from 'primeng/gmap';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppHttpInterceptor } from 'src/app/app-interceptor.service';
 import { AirportViewComponent } from './airport-view/airport-view.component';
-
+import { CameraViewComponent } from './camera-view/camera-view.component';
+import { WebCamModule } from 'ack-angular-webcam';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapViewComponent,
-    AirportViewComponent
+    AirportViewComponent,
+    CameraViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     GMapModule,
-    HttpClientModule
+    HttpClientModule,
+    WebCamModule
   ],
   providers: [
     {
