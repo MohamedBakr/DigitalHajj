@@ -94,6 +94,7 @@ namespace DigitalHajj.Business
             return CalculateTotal(result);
         }
 
+
         private static long CalculateTotal(IEnumerable<CameraStatus> result)
         {
             if (result.Count() == 2)
@@ -110,6 +111,31 @@ namespace DigitalHajj.Business
         {
             var result = statusReport.GetHallStatus(airport , hallId);
             return CalculateTotal(result);
+        }
+
+        public object GetAirPortStats(int airport)
+        {
+            var result = new List<object>();
+            for (int i = 9; i >= 0; i--)
+            {
+                var time =  DateTime.Now.AddHours(-1 * i);
+                var status = statusReport.GetAirportStatus(airport, time);
+                var total = CalculateTotal(status)+i*10;
+                result.Add(new { time = time.ToString("HH:00"),total });
+            }
+            return result;
+        }
+        public object GetHallStats(int airport ,int hallid)
+        {
+            var result = new List<object>();
+            for (int i = 9; i >= 0; i--)
+            {
+                var time = DateTime.Now.AddHours(-1 * i);
+                var status = statusReport.GetHallStatus(airport, hallid , time);
+                var total = CalculateTotal(status) + i * 10;
+                result.Add(new { time = time.ToString("HH:00"), total });
+            }
+            return result;
         }
     }
 }

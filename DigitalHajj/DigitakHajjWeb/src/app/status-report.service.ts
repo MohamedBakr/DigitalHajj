@@ -16,4 +16,10 @@ export class StatusReportService {
   getAirPortDetails(airport:string) {
     return this.httpClient.get<airportstatus[]>('DigitalHaj/GetAirportStatus/'+airport);
   }
+  getAirPortStats(airport:string) {
+    return this.httpClient.get<any[]>('DigitalHaj/GetAirPortStats/'+airport);
+  } 
+  getHalltStats(airport:string,hall:string) {
+    return this.httpClient.get<any[]>('DigitalHaj/GeHallStats/'+airport+"/"+hall);
+  } 
 }

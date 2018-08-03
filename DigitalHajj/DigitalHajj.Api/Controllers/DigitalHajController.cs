@@ -30,5 +30,15 @@ namespace DigitalHajj.Api.Controllers
         {
             return Ok(CrowdCounterBl.GetAirPortStatus(airport));
         }
+        [HttpGet("GetAirPortStats/{airport}")]
+        public IActionResult GetAirPortStats(int airport)
+        {
+            return Ok(CrowdCounterBl.GetAirPortStats(airport));
+        }
+        [HttpGet("GeHallStats/{airport}/{hall}")]
+        public IActionResult GetHallStats(int airport,int hall)
+        {
+            return Ok(CrowdCounterBl.GetHallStats(airport,hall));
+        }
     }
 }

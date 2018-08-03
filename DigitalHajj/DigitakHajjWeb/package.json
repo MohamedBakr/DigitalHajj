@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "ack-angular-webcam": "^1.9.3",
+    "chart.js": "^2.7.2",
     "core-js": "^2.5.4",
     "primeng": "^6.1.0-rc.1",
     "rxjs": "^6.0.0",

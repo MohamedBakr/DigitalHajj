@@ -10,6 +10,8 @@ import { AppHttpInterceptor } from 'src/app/app-interceptor.service';
 import { AirportViewComponent } from './airport-view/airport-view.component';
 import { CameraViewComponent } from './camera-view/camera-view.component';
 import { WebCamModule } from 'ack-angular-webcam';
+import {ChartModule} from 'primeng/chart';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { WebCamModule } from 'ack-angular-webcam';
     AppRoutingModule,
     GMapModule,
     HttpClientModule,
-    WebCamModule
+    WebCamModule,
+    ChartModule
   ],
   providers: [
     {
